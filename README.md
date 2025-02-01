@@ -1,10 +1,10 @@
 # 🚀 TodoMaster - Modern Todo App with Admin Dashboard
 
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/yourusername/todomaster/main.yml)](https://github.com/yourusername/todomaster/actions)
-[![Code Quality](https://img.shields.io/codefactor/grade/github/yourusername/todomaster)](https://www.codefactor.io/repository/github/yourusername/todomaster)
-[![Dependencies](https://img.shields.io/librariesio/github/yourusername/todomaster)](https://libraries.io/github/yourusername/todomaster)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/vk-cb/tasks-frontend/main.yml)](https://github.com/vk-cb/tasks-frontend/actions)
+[![Code Quality](https://img.shields.io/codefactor/grade/github/vk-cb/tasks-frontend)](https://www.codefactor.io/repository/github/yourusername/todomaster)
+[![Dependencies](https://img.shields.io/librariesio/github/yourusername/todomaster)](https://libraries.io/github/vk-cb/tasks-frontend)
 
-**Live Demo:** [https://todomaster.example.com](https://your-deployment-link.com) (Add your deployment link here)
+**Live Demo:** [https://todomaster.example.com](https://your-deployment-link.com) 
 
 ![TodoMaster Dashboard Preview](./screenshots/dashboard.png)
 
@@ -60,7 +60,7 @@
 ### Installation
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/todomaster.git
+git clone https://github.com/vk-cb/tasks-frontend.git
 
 # Install dependencies
 npm install

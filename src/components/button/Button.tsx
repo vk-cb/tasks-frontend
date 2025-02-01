@@ -1,26 +1,24 @@
 import React from "react";
 interface ButtonProps {
-    button_text: string;
-    width?: string;
-    height?: string;
+  type?: "button" | "submit" | "reset";
+    text: string;
     padding?: string;
     borderRadius?: string;
     icon_left?: React.ReactNode;
     icon_right?: React.ReactNode;
-    second_className?: string;
+    className?: string;
     onClick?: () => void;
     variant?: "primary" | "secondary" | "danger" | "success" | "warning" | "outline";
 }
 
 const Button = ({
-  button_text,
-  width = "auto",
-  height = "auto",
+  type = "button",
+  text,
   padding = "px-4 py-2",
   borderRadius = "rounded-md",
   icon_left,
   icon_right,
-  second_className = "",
+  className = "",
   onClick,
   variant = "primary",
   ...props
@@ -32,18 +30,18 @@ const Button = ({
     danger: "bg-red-500 text-white hover:bg-red-600",
     success: "bg-green-500 text-white hover:bg-green-600",
     warning: "bg-yellow-500 text-white hover:bg-yellow-600",
-    outline: "border border-gray-500 text-gray-500 hover:bg-gray-100",
+    outline: "border border-gray-500 text-black hover:bg-gray-100",
   };
 
   return (
     <button
-      className={`flex items-center justify-center ${padding} ${borderRadius} ${variants[variant]} ${second_className}`}
-      style={{ width, height }}
+      className={`flex items-center justify-center ${padding} ${borderRadius} ${variants[variant]} ${className}`}
       onClick={onClick}
       {...props}
+      type={type}
     >
       {icon_left && <span className="mr-2">{icon_left}</span>}
-      <span>{button_text}</span>
+      <span>{text}</span>
       {icon_right && <span className="ml-2">{icon_right}</span>}
     </button>
   );
