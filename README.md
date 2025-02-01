@@ -1,50 +1,69 @@
-# React + TypeScript + Vite
+# 🚀 TodoMaster - Modern Todo App with Admin Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/yourusername/todomaster/main.yml)](https://github.com/yourusername/todomaster/actions)
+[![Code Quality](https://img.shields.io/codefactor/grade/github/yourusername/todomaster)](https://www.codefactor.io/repository/github/yourusername/todomaster)
+[![Dependencies](https://img.shields.io/librariesio/github/yourusername/todomaster)](https://libraries.io/github/yourusername/todomaster)
 
-Currently, two official plugins are available:
+**Live Demo:** [https://todomaster.example.com](https://your-deployment-link.com) (Add your deployment link here)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![TodoMaster Dashboard Preview](./screenshots/dashboard.png)
 
-## Expanding the ESLint configuration
+## 🌟 Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Core Functionality
+- **Multi-User System** with JWT Authentication
+- **Role-Based Access Control** (Admin/Regular User)
+- **CRUD Operations** for Todos with:
+  - 📝 Title & Rich Text Description
+  - 🏷️ Status Management (Todo/In Progress/Done)
+  - 🕒 Created/Updated Timestamps
+- 📱 **Mobile-First Responsive Design**
+- 🌓 Dark/Light Mode Support
 
-- Configure the top-level `parserOptions` property like this:
+### Admin Dashboard
+- 👥 User Management System
+- 📊 Analytics Dashboard
+- 🔍 Global Todo Search with Filters
+- 📤 CSV Export Functionality
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Advanced Features
+- 🔄 Real-time Updates with WebSockets
+- 📲 PWA Support (Installable as Native App)
+- 🗂️ Drag-and-Drop Kanban Interface
+- 🔔 Desktop Notifications
+- 📈 Activity Timeline
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## 🛠️ Tech Stack
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+**Frontend**  
+[![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white)](https://react.dev/)
+[![React Router](https://img.shields.io/badge/React_Router-CA4245?logo=react-router&logoColor=white)](https://reactrouter.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Axios](https://img.shields.io/badge/Axios-5A29E4?logo=axios&logoColor=white)](https://axios-http.com/)
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+**Backend** (Optional - Add your backend repo link)  
+[![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/Express-000000?logo=express&logoColor=white)](https://expressjs.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+
+**Dev Tools**  
+[![Vite](https://img.shields.io/badge/Vite-B73BFE?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![ESLint](https://img.shields.io/badge/ESLint-4B32C3?logo=eslint&logoColor=white)](https://eslint.org/)
+[![Prettier](https://img.shields.io/badge/Prettier-F7B93E?logo=prettier&logoColor=white)](https://prettier.io/)
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js ≥18.x
+- npm ≥9.x
+
+### Installation
+```bash
+# Clone repository
+git clone https://github.com/yourusername/todomaster.git
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
