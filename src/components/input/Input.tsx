@@ -6,6 +6,7 @@ interface InputProps {
     placeholder?: string;
     label?: string;
     second_class?: string;
+    className? : string;
     star?: string;
     options_hint?: string;
     hint?: string;
@@ -34,6 +35,7 @@ const Input = ({
   max,
   onFocus,
   onBlur,
+  className,
 }:InputProps) => {
   return (
     <div className={`mb-4 ${second_class}`}>
@@ -59,9 +61,9 @@ const Input = ({
         disabled={disabled}
         min={min}
         max={max}
-        className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm 
-          focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+        className={`outline-none block w-full px-3 border rounded-md  ${className}
           ${disabled ? "bg-gray-100 text-gray-500 cursor-not-allowed" : "bg-white"}
+        
         `}
       />
       {hint && (

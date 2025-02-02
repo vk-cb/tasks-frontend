@@ -4,11 +4,12 @@ import { errorAlert } from '../../components/ui/loader/loader';
 import { makeApiRequest } from '../../apis/function';
 import { API_URLS } from '../../apis/urls';
 
-interface User {
+export interface User {
   id: number;
   name: string;
   email: string;
   token?: string;
+  msg?: string;
 }
 
 interface AuthState {

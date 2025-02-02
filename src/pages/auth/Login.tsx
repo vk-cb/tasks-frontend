@@ -9,10 +9,11 @@ import { handleChange } from '../../utility/usedFunctions';
 import { LoginState } from '../../../interfaces';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { login } from '../../store/reducers/auth';
-
+import { login, User } from '../../store/reducers/auth';
+import type { AppDispatch } from '../../store/store';
+import { successAlert } from '../../components/ui/loader/loader';
 const Login = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const [state, setState] = useState<LoginState> ({
     email : "",
     password : ""
@@ -20,7 +21,12 @@ const Login = () => {
 
   const handleSubmit = async (e:any) => {
     e.preventDefault();
-    const response = dispatch(login(state))
+    const response = await dispatch(login(state))
+    if(response?.meta?.requestStatus === "fulfilled"){
+      const user = response.payload as User; 
+      successAlert(user?.msg || "Login Successfully")
+    }
+    console.log(response)
   };
 
 
