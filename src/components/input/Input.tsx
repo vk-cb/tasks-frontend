@@ -1,10 +1,10 @@
 import React from "react";
 interface InputProps {
-    type: string;
-    value: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    placeholder: string;
-    label: string;
+    type?: "email" | "text" | "password";
+    value?: string;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    placeholder?: string;
+    label?: string;
     second_class?: string;
     star?: string;
     options_hint?: string;
