@@ -3,6 +3,7 @@ import  { lazy, useEffect, useState } from "react";
 import Layout from "../container/layout";
 import { RouteType } from "../../interfaces";
 import AddTask from "../pages/users/tasks/addTask";
+import TaskCard from "../pages/users/tasks/taskCard";
 const Login = lazy(() => import("../pages/auth/Login"));
 const Signup = lazy(() => import("../pages/auth/Signup"));
 
@@ -10,6 +11,7 @@ const openRoutes: RouteType[] = [
     { path: "/", element: <Login /> },
     { path: "/register", element: <Signup/> },
     { path: "/add-task", element: <AddTask/> },
+    { path: "/card-task", element: <TaskCard/> },
 
   ];
 

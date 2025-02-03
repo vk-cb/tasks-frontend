@@ -1,17 +1,21 @@
-import React from 'react'
-import Input from '../../../components/input/Input'
 import Button from '../../../components/button/Button'
+import Textarea from '../../../components/textarea/Textarea'
 
 const AddTask = () => {
   return (
-    <div className='border border-gray-300 rounded-xl min-h-[300px] w-full'>
-        <div className='max-h-[80%] border'>
-        <Input placeholder='Task Heading' className='w-full outline-none border-none py-0 text-sm font-semibold'/>
-        <Input placeholder='Description' className='w-full outline-none border-none py-0'/>
+    <div className='border border-gray-300 rounded-xl mt-2 mx-2 sm:mx-0 w-full sm:w-xl  md:w-2xl xl:w-4xl '>
+        <div className='max-h-[400px] px-2 pt-4 overflow-y-scroll'>
+          <Textarea placeholder='Heading' className='border-none outline-none py-0 text-sm font-medium tracking-wider'/>
+          <Textarea placeholder='Description' className='border-none outline-none py-0 text-sm text-gray-500 tracking-wider'/>
         </div>
-        <div>
-            <Button text='Cancel' className='px-1 py-1'/>
-            <Button text='Add task'/>
+        <div className='border-b-[1px] border-gray-200 my-4'></div>
+        <div className='flex justify-end gap-4 px-6 pb-4'>
+          <div>
+            <Button text='Cancel' btnClass='px-1 py-0' variant='danger'/>
+          </div>
+          <div>
+            <Button text='Add task' btnClass=' py-0' variant='outline'/>
+          </div>
         </div>
     </div>
   )

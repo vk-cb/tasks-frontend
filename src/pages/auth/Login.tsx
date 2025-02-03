@@ -62,7 +62,7 @@ const Login = () => {
            
           </div>
 
-          <Button type='submit' text="Login" className='w-full cursor-pointer py-2' variant='outline'/>
+          <Button type='submit' text="Login" btnClass='w-full cursor-pointer py-2' variant='outline'/>
           <div className="text-center">
             <Link to="/register" className="text-sm ">
               don't have an account? <span className='text-blue-600 hover:underline'> Register here</span>
