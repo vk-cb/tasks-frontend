@@ -13,7 +13,7 @@ const LeftBar = () => {
     window.location.href = "/";
   };
   return (
-    <div className="flex flex-col justify-between h-screen w-[300px] p-4 bg-gray-50  ">
+    <div className=" flex flex-col justify-between h-screen w-[300px] p-4 bg-gray-50  ">
       <div className="mb-4">
         <div className="mb-4 flex flex-col items-center border-b-2 pb-2 border-light">
           {/* <img
