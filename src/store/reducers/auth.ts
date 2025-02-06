@@ -89,7 +89,15 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action: PayloadAction<User>) => {
         state.status = 'succeeded';
         state.isAuthenticated = true;
+        let _data = {
+          id: action.payload.data.id,
+          name: action.payload.data.name,
+          email: action.payload.data.email,
+          token: action.payload.token,
+          msg: action.payload.msg
+        }
         state.user = action.payload;
+        console.log(_data)
         localStorage.setItem('user', JSON.stringify(action.payload));
         localStorage.setItem('token', action.payload.token || '');
       })

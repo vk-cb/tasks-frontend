@@ -1,58 +1,118 @@
-import { useState } from 'react';
-import { FcGoogle } from 'react-icons/fc';
-import { FaApple, FaFacebook } from 'react-icons/fa';
-import SocialButton from '../../components/ui/socialButton/SocialButton';
-import Button from '../../components/button/Button';
-import Input from '../../components/input/Input';
-import { SignupState } from '../../../interfaces';
-import { handleChange } from '../../utility/usedFunctions';
-import { Link } from 'react-router-dom';
-import Select from '../../components/select/Select';
+import { useEffect, useState } from "react";
+import { FcGoogle } from "react-icons/fc";
+import { FaApple, FaFacebook } from "react-icons/fa";
+import SocialButton from "../../components/ui/socialButton/SocialButton";
+import Button from "../../components/button/Button";
+import Input from "../../components/input/Input";
+import { SignupState } from "../../../interfaces";
+import { handleChange } from "../../utility/usedFunctions";
+import { Link } from "react-router-dom";
+import Select from "../../components/select/Select";
+import { getRoles, getTaskStatus } from "../../container/apiCall/common";
+import { changeStatus, createTask, getAllTask, getTaskById, updateTask } from "../../container/apiCall/user";
+import { TaskStatus } from "../../../interfaces/apiInterface";
 
 const Signup = () => {
-
   const [state, setState] = useState<SignupState>({
-    name : "",
-    email : "",
-    role : "",
-    password : ""
-  })
+    name: "",
+    email: "",
+    role: "",
+    password: "",
+  });
 
-  const handleSubmit = (e:any) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
   };
-
+  const fetchRoles = ()=>{
+    const payload = {
+      status : TaskStatus.IN_PROGRESS,
+    }
+    // getRoles()
+    getTaskStatus()
+    // createTask(payload)
+    // updateTask(payload,"67a4e5d394dd5df6ef6c269c")
+    // getAllTask()
+    // getTaskById("67a4e5d394dd5df6ef6c269c")
+    // changeStatus(payload, "67a4e5d394dd5df6ef6c269c")
+  }
+  useEffect(()=>{
+    const res = fetchRoles()
+    console.log(res)
+  },[])
   return (
     <div className="w-full bg-linear-to-b from-[#9fd4ef] to-white min-h-screen flex flex-col items-center justify-center sm:p-4 p-1 relative">
-      <p className='absolute top-8 left-4 text-3xl font-bold italic bg-gradient-to-r from-blue-600 to-teal-500 inline-block text-transparent bg-clip-text'>
-  TaskMaster
-</p>
+      <p className="absolute top-8 left-4 text-3xl font-bold italic bg-gradient-to-r from-blue-600 to-teal-500 inline-block text-transparent bg-clip-text">
+        TaskMaster
+      </p>
       <div className="max-w-md w-full bg-linear-to-b from-[#c6f0fb] to-white p-8 rounded-lg shadow-sm">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-teal-500 inline-block text-transparent bg-clip-text mb-2">
-          Organize your world, master your workflow
+            Organize your world, master your workflow
           </h1>
           <p className="text-gray-600">
-          Craft, Track, and Conquer goals in one free hub
+            Craft, Track, and Conquer goals in one free hub
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6 ">
           <div className="space-y-4">
-           
-            <Input type='text' placeholder='Enter Your Name' value={state.email} onChange={(e)=>handleChange(state, setState, e.target.name as keyof SignupState, e.target.value)} />
-            <Input type='email' placeholder='Enter Your Email' value={state.email} onChange={(e)=>handleChange(state, setState, e.target.name as keyof SignupState, e.target.value)} />
+            <Input
+              name="name"
+              type="text"
+              placeholder="Enter Your Name"
+              value={state.name}
+              onChange={(e) =>
+                handleChange(
+                  state,
+                  setState,
+                  e.target.name as keyof SignupState,
+                  e.target.value
+                )
+              }
+            />
+            <Input
+              type="email"
+              name="email"
+              placeholder="Enter Your Email"
+              value={state.email}
+              onChange={(e) =>
+                handleChange(
+                  state,
+                  setState,
+                  e.target.name as keyof SignupState,
+                  e.target.value
+                )
+              }
+            />
 
-<Input type='password' placeholder='Enter Your Password' value={state.email} onChange={(e)=>handleChange(state, setState, e.target.name as keyof SignupState, e.target.value)}/>
+            <Input
+              type="password"
+              name="password"
+              placeholder="Enter Your Password"
+              value={state.password}
+              onChange={(e) =>
+                handleChange(
+                  state,
+                  setState,
+                  e.target.name as keyof SignupState,
+                  e.target.value
+                )
+              }
+            />
 
-<Select placeholder='Select Role' />
-           
+            <Select placeholder="Select Role"  />
           </div>
 
-          <Button type='submit' text="Signup" btnClass='w-full cursor-pointer py-2' variant='outline'/>
+          <Button
+            type="submit"
+            text="Signup"
+            btnClass="w-full cursor-pointer py-2"
+            variant="outline"
+          />
           <div className="text-center">
             <Link to="/" className="text-sm ">
-              Already have an account? <span className='text-blue-600 hover:underline'>Login here</span>
+              Already have an account?{" "}
+              <span className="text-blue-600 hover:underline">Login here</span>
             </Link>
           </div>
         </form>
@@ -64,15 +124,22 @@ const Signup = () => {
         </div>
 
         <div className="grid grid-cols-3 gap-3">
-          <SocialButton icon={<FcGoogle className="text-xl" />} provider="Google" />
-          <SocialButton icon={<FaApple className="text-xl" />} provider="Apple" />
-          <SocialButton icon={<FaFacebook className="text-xl text-blue-600" />} provider="Facebook" />
+          <SocialButton
+            icon={<FcGoogle className="text-xl" />}
+            provider="Google"
+          />
+          <SocialButton
+            icon={<FaApple className="text-xl" />}
+            provider="Apple"
+          />
+          <SocialButton
+            icon={<FaFacebook className="text-xl text-blue-600" />}
+            provider="Facebook"
+          />
         </div>
       </div>
     </div>
   );
 };
-
-
 
 export default Signup;

@@ -61,7 +61,7 @@ const Input = ({
         disabled={disabled}
         min={min}
         max={max}
-        className={`outline-none block w-full px-3 border rounded-md  ${className}
+        className={`outline-none block w-full px-3 py-1 border rounded-md  ${className}
           ${disabled ? "bg-gray-100 text-gray-500 cursor-not-allowed" : "bg-white"}
         
         `}

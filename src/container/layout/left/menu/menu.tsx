@@ -6,28 +6,31 @@ import { IoListOutline,IoTrashBinOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { FaTasks } from "react-icons/fa";
 import {MenuProps} from '../../../../../interfaces/index'
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../store/store";
+
 const Menu: React.FC<MenuProps> = () => {
   const location = useLocation();
 console.log(location.pathname.startsWith('/billing'));
-
+const role = useSelector((state:RootState)=>state?.auth?.user?.data?.role)
+console.log(role)
   const menuItems = [ 
-
   {
     title: "Tasks",
     icon: <FaTasks size={20} />,
-    toLink:"/billing/lists" ,
+    toLink:`user/add-task` ,
     userType: [ "user"],
   },
   {
     title: "Deleted Tasks",
     icon: <IoTrashBinOutline size={20} />,
-    toLink:"/billing/lists" ,
+    toLink:`${role}/deleted-task`,
     userType: [ "user"],
   },
   {
     title: "Users",
     icon: <BsPeople size={20} />,
-    toLink: "/admin/shishya",
+    toLink: `admin/users-list`,
     userType: ["admin"],
   },
   {

@@ -10,16 +10,13 @@ const Signup = lazy(() => import("../pages/auth/Signup"));
 const openRoutes: RouteType[] = [
     { path: "/", element: <Login /> },
     { path: "/register", element: <Signup/> },
-    { path: "/add-task", element: <AddTask/> },
-    { path: "/card-task", element: <TaskCard/> },
-
   ];
 
   const adminRoute : RouteType[] = [
-    
   ]
   const usersRoutes : RouteType[] = [
-    { path: "/user/tasks", element: <Login /> },
+    { path: "/user/add-task", element: <AddTask/> },
+    { path: "/user/card-task", element: <TaskCard/> },
   ]
 
   const PagesRoute = () => {
@@ -36,7 +33,7 @@ const openRoutes: RouteType[] = [
       else{
         setAllRoutes(openRoutes)
       }
-      console.log(role)
+      console.log(role?.data?.role)
     },[])
     return (
       <Layout>

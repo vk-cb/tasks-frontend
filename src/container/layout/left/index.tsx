@@ -5,15 +5,20 @@ import { useNavigate } from "react-router-dom";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import Menu from "./menu/menu";
 import Button from "../../../components/button/Button";
+import { logout } from "../../../store/reducers/auth";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../store/store";
 const LeftBar = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const [selectedMenu, setSelectedMenu] = useState("");
 
   const handleLogout = () => {
-    window.location.href = "/";
+   const res = dispatch(logout())
+   navigate('/')
   };
   return (
-    <div className=" flex flex-col justify-between h-screen w-[300px] p-4 bg-gray-50  ">
+    <div className=" flex flex-col justify-between h-screen w-[300px] p-4 bg-gray-200  ">
       <div className="mb-4">
         <div className="mb-4 flex flex-col items-center border-b-2 pb-2 border-light">
           {/* <img
@@ -32,6 +37,7 @@ const LeftBar = () => {
         
         <div className="flex justify-center">
          <Button
+         onClick={()=>handleLogout()}
                    text="Logout"
                    icon_right={<MdOutlineArrowOutward />}
                  />
