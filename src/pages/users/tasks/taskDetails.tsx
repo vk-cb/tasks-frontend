@@ -1,13 +1,13 @@
 import { Check, Trash2 , PenLine } from "lucide-react";
-import React from "react";
 import Select from "../../../components/select/Select";
 
-const TaskDetails = () => {
+const TaskDetails = ({taskDetails, taskStatusData}) => {
   const variant = {
     pending: "text-gray-500 bg-white",
     inprogress: " border-yellow-500 text-yellow-500 bg-yellow-50",
     completed: "border-green-500 text-green-500 bg-green-50",
   };
+  
   return (
     <div>
       <div className="h-8 border-b border-gray-400 flex justify-center">
@@ -24,45 +24,10 @@ const TaskDetails = () => {
         </div>
         <div className="w-full ">
           <p className="font-semibold  w-full">
-            You can further customize the UI by adding more features like task
-            deletion, task completion, due dates, etc., and styling it further
-            with Tailwind CSS. This is a basic example to get you started. You
-            can expand upon it to create a more feature-rich task management
-            application.
+           {taskDetails?.title}
           </p>
           <p className="text-gray-500 text-sm w-full">
-            You can further customize the UI by adding more features like task
-            deletion, task completion, due dates, etc., and styling it further
-            with Tailwind CSS. This is a basic example to get you started. You
-            can expand upon it to create a more feature-rich task management
-            application.
-            You can further customize the UI by adding more features like task
-            deletion, task completion, due dates, etc., and styling it further
-            with Tailwind CSS. This is a basic example to get you started. You
-            can expand upon it to create a more feature-rich task management
-            application.
-            You can further customize the UI by adding more features like task
-            deletion, task completion, due dates, etc., and styling it further
-            with Tailwind CSS. This is a basic example to get you started. You
-            can expand upon it to create a more feature-rich task management
-            application.
-            You can further customize the UI by adding more features like task
-            deletion, task completion, due dates, etc., and styling it further
-            with Tailwind CSS. This is a basic example to get you started. You
-            can expand upon it to create a more feature-rich task management
-            application.You can further customize the UI by adding more features like task
-            deletion, task completion, due dates, etc., and styling it further
-            with Tailwind CSS. This is a basic example to get you started. You
-            can expand upon it to create a more feature-rich task management
-            application.You can further customize the UI by adding more features like task
-            deletion, task completion, due dates, etc., and styling it further
-            with Tailwind CSS. This is a basic example to get you started. You
-            can expand upon it to create a more feature-rich task management
-            application.You can further customize the UI by adding more features like task
-            deletion, task completion, due dates, etc., and styling it further
-            with Tailwind CSS. This is a basic example to get you started. You
-            can expand upon it to create a more feature-rich task management
-            application.
+            {taskDetails?.description}
           </p>
         </div>
       </div>

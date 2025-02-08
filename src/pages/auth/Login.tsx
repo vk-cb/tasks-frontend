@@ -7,13 +7,14 @@ import Button from '../../components/button/Button';
 import Input from '../../components/input/Input';
 import { handleChange } from '../../utility/usedFunctions';
 import { LoginState } from '../../../interfaces';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login, User } from '../../store/reducers/auth';
 import type { AppDispatch } from '../../store/store';
 import { successAlert } from '../../components/ui/loader/loader';
 const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
   const [state, setState] = useState<LoginState> ({
     email : "",
     password : ""
@@ -24,6 +25,8 @@ const Login = () => {
     const response = await dispatch(login(state))
     if(response?.meta?.requestStatus === "fulfilled"){
       const user = response.payload as User; 
+      user?.data?.role==="user" ? navigate('/user/tasks') : navigate('/')
+      
       successAlert(user?.msg || "Login Successfully")
     }
     console.log(response)

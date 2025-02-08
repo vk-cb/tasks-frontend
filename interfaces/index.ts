@@ -33,3 +33,8 @@ export interface MenuProps {
      data : any ,
      additionalHeaders: any
   }
+
+  export interface taskCardProps {
+    title : string, 
+    description: string
+  }

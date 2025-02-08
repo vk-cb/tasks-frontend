@@ -18,14 +18,14 @@ console.log(role)
   {
     title: "Tasks",
     icon: <FaTasks size={20} />,
-    toLink:`user/add-task` ,
+    toLink:`user/tasks` ,
     userType: [ "user"],
   },
   {
     title: "Deleted Tasks",
     icon: <IoTrashBinOutline size={20} />,
     toLink:`${role}/deleted-task`,
-    userType: [ "user"],
+    userType: [ "admin"],
   },
   {
     title: "Users",
@@ -41,13 +41,13 @@ console.log(role)
   },
   
 ]
-const currentUserType = location.pathname.startsWith('/billing') ? "billingUser" : "admin";
+const currentUserType = role === "user" ? "user" : "admin";
 const filteredMenuData = menuItems.filter(item => item.userType.includes(currentUserType));
   return (
     <div>
       <nav>
         <ul className="flex flex-col gap-2">
-          {menuItems.map((route, index) => (
+          {filteredMenuData.map((route, index) => (
             <li key={index}>
               <NavLink 
                 to={route.toLink} 

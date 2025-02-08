@@ -2,10 +2,12 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import  { lazy, useEffect, useState } from "react";
 import Layout from "../container/layout";
 import { RouteType } from "../../interfaces";
-import AddTask from "../pages/users/tasks/addTask";
-import TaskCard from "../pages/users/tasks/taskCard";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import TaskMainPage from "../pages/users/tasks";
 const Login = lazy(() => import("../pages/auth/Login"));
 const Signup = lazy(() => import("../pages/auth/Signup"));
+const Profile = lazy(() => import("../pages/users/profile"));
 
 const openRoutes: RouteType[] = [
     { path: "/", element: <Login /> },
@@ -15,13 +17,13 @@ const openRoutes: RouteType[] = [
   const adminRoute : RouteType[] = [
   ]
   const usersRoutes : RouteType[] = [
-    { path: "/user/add-task", element: <AddTask/> },
-    { path: "/user/card-task", element: <TaskCard/> },
+    { path: "/user/tasks", element: <TaskMainPage/> },
+    { path: "/profile", element: <Profile/> },
   ]
 
   const PagesRoute = () => {
     const [allRoutes, setAllRoutes] = useState<RouteType[]>([])
-
+    const user = useSelector((state:RootState)=>state.auth)
     useEffect(()=>{
       const role = JSON.parse(localStorage.getItem("user") || "null");
       if(role?.data?.role === "user"){
@@ -34,11 +36,11 @@ const openRoutes: RouteType[] = [
         setAllRoutes(openRoutes)
       }
       console.log(role?.data?.role)
-    },[])
+    },[user])
     return (
       <Layout>
         <Routes>
-          {openRoutes.map(({ path, element, navigate }, i) => (
+          {allRoutes.map(({ path, element, navigate }, i) => (
             <Route
               key={i}
               path={path}

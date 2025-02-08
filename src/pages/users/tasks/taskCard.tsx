@@ -1,15 +1,14 @@
-import { Check, Edit, Ellipsis, PenLine } from "lucide-react";
+import { Check, Ellipsis, PenLine } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import "./task.css";
-import MakeModal from "../../../components/modal/MakeModal";
-import TaskDetails from "./taskDetails";
-const TaskCard = () => {
+import { taskCardProps } from "../../../../interfaces";
+import { buttonData } from "../../../utility/data";
+const TaskCard = ({title, description}:taskCardProps) => {
   const variant = {
     pending: "text-gray-500 bg-white",
     inprogress: " border-yellow-500 text-yellow-500 bg-yellow-50",
     completed: "border-green-500 text-green-500 bg-green-50",
   };
-  const [status, setStatus] = useState("pending");
   const [popoverOpen, setPopoverOpen] = useState(false);
   const popoverRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
@@ -35,18 +34,10 @@ const TaskCard = () => {
         </div>
         <div className="w-full overflow-hidden">
           <p className="font-semibold truncate w-full">
-            You can further customize the UI by adding more features like task
-            deletion, task completion, due dates, etc., and styling it further
-            with Tailwind CSS. This is a basic example to get you started. You
-            can expand upon it to create a more feature-rich task management
-            application.
+            {title}
           </p>
           <p className="text-gray-500 text-sm truncate w-full">
-            You can further customize the UI by adding more features like task
-            deletion, task completion, due dates, etc., and styling it further
-            with Tailwind CSS. This is a basic example to get you started. You
-            can expand upon it to create a more feature-rich task management
-            application.
+            {description}
           </p>
         </div>
       </div>
@@ -61,33 +52,21 @@ const TaskCard = () => {
         />
         {popoverOpen && (
           <div ref={popoverRef} className="absolute -right-16 top-8 w-40 bg-white  rounded-md z-10 popOver">
-            <button
+            {
+            buttonData.map((d, index)=>(
+              <button
               className="cursor-pointer w-full px-4 py-2 text-left hover:bg-gray-100"
               onClick={() => {
                 // setStatus(state);
                 setPopoverOpen(false);
               }}
             >
-              Pending
+              {d.label}
             </button>
-            <button
-              className="cursor-pointer w-full px-4 py-2 text-left hover:bg-gray-100"
-              onClick={() => {
-                // setStatus(state);
-                setPopoverOpen(false);
-              }}
-            >
-              In Progress
-            </button>
-            <button
-              className="cursor-pointer w-full px-4 py-2 text-left hover:bg-gray-100"
-              onClick={() => {
-                // setStatus(state);
-                setPopoverOpen(false);
-              }}
-            >
-              Completed
-            </button>
+            ))     
+            }
+          
+           
             <button
               className="cursor-pointer w-full px-4 py-2 text-left text-red-500 hover:bg-red-100"
               onClick={() => {
@@ -100,9 +79,7 @@ const TaskCard = () => {
           </div>
         )}
       </div>
-      <MakeModal className="w-[300px] sm:w-[400px] md:w-[550px] lg:w-[700px] max-h-[400px]" isOpen={false} onClose={()=>{}}>
-      <TaskDetails/>
-      </MakeModal>
+     
     </div>
   );
 };

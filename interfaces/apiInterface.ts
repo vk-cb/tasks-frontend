@@ -10,3 +10,19 @@ export interface createTaskProps{
   export interface ChangeStatusProps {
     status: TaskStatus;
   }
+  export interface TaskApiProps {
+    _id: string;
+    title: string;
+    description: string;
+    status: "pending" | "completed" | "in-progress"; 
+    user: string;
+    createdAt: string; 
+    updatedAt: string;
+    __v: number;
+  }
+  
+  export interface GetTasksResponse {
+    msg: string;
+    data: TaskApiProps[];
+  }
+  

@@ -5,9 +5,12 @@ import { makeApiRequest } from '../../apis/function';
 import { API_URLS } from '../../apis/urls';
 
 export interface User {
-  id: number;
-  name: string;
-  email: string;
+  data: {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+  };
   token?: string;
   msg?: string;
 }
@@ -89,15 +92,8 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action: PayloadAction<User>) => {
         state.status = 'succeeded';
         state.isAuthenticated = true;
-        let _data = {
-          id: action.payload.data.id,
-          name: action.payload.data.name,
-          email: action.payload.data.email,
-          token: action.payload.token,
-          msg: action.payload.msg
-        }
         state.user = action.payload;
-        console.log(_data)
+        console.log(action.payload)
         localStorage.setItem('user', JSON.stringify(action.payload));
         localStorage.setItem('token', action.payload.token || '');
       })
