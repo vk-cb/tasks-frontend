@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple, FaFacebook } from "react-icons/fa";
 import SocialButton from "../../components/ui/socialButton/SocialButton";
@@ -6,39 +6,46 @@ import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
 import { SignupState } from "../../../interfaces";
 import { handleChange } from "../../utility/usedFunctions";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Select from "../../components/select/Select";
-import { getRoles, getTaskStatus } from "../../container/apiCall/common";
-import { changeStatus, createTask, getAllTask, getTaskById, updateTask } from "../../container/apiCall/user";
-import { TaskStatus } from "../../../interfaces/apiInterface";
+import { getRoles} from "../../container/apiCall/common";
+import { useDispatch } from "react-redux";
+import { register } from "../../store/reducers/auth";
+import { AppDispatch } from "../../store/store";
+import { errorAlert, successAlert } from "../../components/ui/loader/loader";
 
 const Signup = () => {
+  const dispatch = useDispatch<AppDispatch>()
+  const navigate = useNavigate();
   const [state, setState] = useState<SignupState>({
     name: "",
     email: "",
     role: "",
     password: "",
   });
+  const [roles, setRoles] = useState([])
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async(e: any) => {
     e.preventDefault();
+    const res = await dispatch(register(state))
+     if(res?.meta?.requestStatus === "fulfilled"){
+           navigate('/')
+           const user = res.payload
+          successAlert(user?.msg || "User Created Successfully")
+        }
+        
   };
-  const fetchRoles = ()=>{
-    const payload = {
-      status : TaskStatus.IN_PROGRESS,
-    }
-    // getRoles()
-    getTaskStatus()
-    // createTask(payload)
-    // updateTask(payload,"67a4e5d394dd5df6ef6c269c")
-    // getAllTask()
-    // getTaskById("67a4e5d394dd5df6ef6c269c")
-    // changeStatus(payload, "67a4e5d394dd5df6ef6c269c")
+  const fetchRoles = async()=>{
+    
+   const res = await getRoles()
+   if(res.status === 200){
+    setRoles(res?.data.map((d)=>({label : d?.role, value : d?.role})))
+   }
   }
   useEffect(()=>{
     const res = fetchRoles()
-    console.log(res)
   },[])
+console.log(state)
   return (
     <div className="w-full bg-linear-to-b from-[#9fd4ef] to-white min-h-screen flex flex-col items-center justify-center sm:p-4 p-1 relative">
       <p className="absolute top-8 left-4 text-3xl font-bold italic bg-gradient-to-r from-blue-600 to-teal-500 inline-block text-transparent bg-clip-text">
@@ -100,7 +107,7 @@ const Signup = () => {
               }
             />
 
-            <Select placeholder="Select Role"  />
+            <Select placeholder="Select Role" options={roles} value={state.role} onChange={(e)=>setState({...state, role : e.target.value})} />
           </div>
 
           <Button

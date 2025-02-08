@@ -48,7 +48,7 @@ export const login = createAsyncThunk<User, { email: string; password: string },
 );
 
 // ✅ Register Async Thunk - return type explicitly defined
-export const register = createAsyncThunk<User, { name: string; email: string; password: string }, { rejectValue: AuthError }>(
+export const register = createAsyncThunk<User, { name: string; email: string; password: string, role: string }, { rejectValue: AuthError }>(
   'auth/register',
   async (userInfo, thunkAPI) => {
     try {
@@ -105,10 +105,10 @@ const authSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(register.fulfilled, (state, action: PayloadAction<User>) => {
-        state.status = 'succeeded';
-        state.isAuthenticated = true;
-        state.user = action.payload;
-        localStorage.setItem('user', JSON.stringify(action.payload));
+        // state.status = 'succeeded';
+        // state.isAuthenticated = true;
+        // state.user = action.payload;
+        // localStorage.setItem('user', JSON.stringify(action.payload));
       })
       .addCase(register.rejected, (state, action: PayloadAction<AuthError | undefined>) => {
         state.status = 'failed';

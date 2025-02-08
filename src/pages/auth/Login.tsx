@@ -29,7 +29,6 @@ const Login = () => {
       
       successAlert(user?.msg || "Login Successfully")
     }
-    console.log(response)
   };
 
 

@@ -22,10 +22,10 @@ export interface MenuProps {
   }
 
   export interface SignupState {
-    name : "",
-    email : "",
-    role : "",
-    password : ""
+    name : string,
+    email : string,
+    role : string,
+    password : string
   }
 
   export interface baseFunction {
