@@ -1,4 +1,5 @@
-import { ReactNode } from "react";
+import { Dispatch, ReactNode } from "react";
+import { TaskApiProps } from "./apiInterface";
 
 export interface MenuProps {
     setSelectedMenu: React.Dispatch<React.SetStateAction<string>>;
@@ -33,8 +34,23 @@ export interface MenuProps {
      data : any ,
      additionalHeaders: any
   }
+  export interface statusProp{
+    status: "pending" | "done" | "in-progress";
+  }
 
   export interface taskCardProps {
-    title : string, 
-    description: string
+    data : TaskApiProps,
+    onDelete: (id:string) => void; 
+    onStatusChange: (data: any, id: string) => void;
+    showTaskFull : React.Dispatch<React.SetStateAction<boolean>>
+    setTaskId: React.Dispatch<React.SetStateAction<string>>
   }
+
+  // export enum TaskStatus {
+  //   PENDING = "pending",
+  //   IN_PROGRESS = "in-Progress",
+  //   DONE = "done",
+  // }
+  // export interface ChangeStatusProps {
+  //   status: TaskStatus;
+  // }

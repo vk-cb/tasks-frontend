@@ -1,6 +1,6 @@
 import { makeApiRequest } from "../../apis/function"
 import { API_URLS } from "../../apis/urls"
-import {ChangeStatusProps, createTaskProps} from '../../../interfaces/apiInterface'
+import {ChangeStatusProps, createTaskProps, singleTaskProps} from '../../../interfaces/apiInterface'
 import {updateTaskProps} from '../../../types/apiTypes'
 
 export const createTask = async(data :createTaskProps)=>{
@@ -15,7 +15,7 @@ export const getAllTask = async ()=>{
     return makeApiRequest("GET", API_URLS.GET_ALL_TASK)
 }
 
-export const getTaskById = async(id:string)=>{
+export const getTaskById = async(id:string):Promise<singleTaskProps>=>{
     return makeApiRequest("GET", `${API_URLS.GET_TASK_BY_ID}${id}`)
 }
 

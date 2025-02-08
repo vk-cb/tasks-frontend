@@ -8,13 +8,13 @@ export interface createTaskProps{
     DONE = "done",
   }
   export interface ChangeStatusProps {
-    status: TaskStatus;
+    status:"pending" | "done" | "in-progress";
   }
   export interface TaskApiProps {
     _id: string;
     title: string;
     description: string;
-    status: "pending" | "completed" | "in-progress"; 
+    status: "pending" | "done" | "in-progress"; 
     user: string;
     createdAt: string; 
     updatedAt: string;
@@ -26,3 +26,18 @@ export interface createTaskProps{
     data: TaskApiProps[];
   }
   
+  export interface singleTaskProps {
+    data: TaskApiProps;
+    msg : string;
+    status: number
+  }
+  export interface TaskStatusProps {
+    label : string;
+    value : string
+  }
+   export interface taskDetailProps{
+    data : TaskApiProps;
+    onDelete: (id:string) => void;
+    onStatusChange: (data: any, id: string) => void;
+    taskStatus : TaskStatusProps
+   }
