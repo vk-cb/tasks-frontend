@@ -2,17 +2,16 @@ import { useState , FC, SetStateAction, Dispatch } from 'react'
 import Button from '../../../components/button/Button'
 import Textarea from '../../../components/textarea/Textarea'
 import { handleChange } from '../../../utility/usedFunctions'
-import { createTask } from '../../../container/apiCall/user'
-import { hideLoader, showLoader } from '../../../components/ui/loader/loader'
 import { createTaskProps } from '../../../../interfaces/apiInterface'
 
 interface AddTaskProps {
   onCancel: () => void;
-  onAdd : ()=> void;
+  onAdd: ()=> void;
   createTask :createTaskProps
   setCreateTask :  Dispatch<SetStateAction<createTaskProps>>;
+  update? : boolean
 }
-const AddTask: FC<AddTaskProps> = ({onAdd, onCancel, createTask, setCreateTask}) => {
+const AddTask: FC<AddTaskProps> = ({onAdd, onCancel, createTask, setCreateTask, update}) => {
   
   
   return (
@@ -28,7 +27,7 @@ const AddTask: FC<AddTaskProps> = ({onAdd, onCancel, createTask, setCreateTask})
             <Button onClick={onCancel} text='Cancel' btnClass='px-1 py-0' variant='danger'/>
           </div>
           <div>
-            <Button onClick={onAdd} text='Add task' btnClass=' py-0' variant='outline'/>
+            <Button onClick={onAdd } text={update ? "Update Task": "Add task"}btnClass=' py-0' variant='outline'/>
           </div>
         </div>
     </div>

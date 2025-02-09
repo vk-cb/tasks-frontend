@@ -44,6 +44,7 @@ export interface MenuProps {
     onStatusChange: (data: any, id: string) => void;
     showTaskFull : React.Dispatch<React.SetStateAction<boolean>>
     setTaskId: React.Dispatch<React.SetStateAction<string>>
+    setUpdateModal? : React.Dispatch<React.SetStateAction<boolean>>
   }
 
   // export enum TaskStatus {

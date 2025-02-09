@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import "./task.css";
 import { taskCardProps } from "../../../../interfaces";
 import { buttonData } from "../../../utility/data";
-const TaskCard = ({onDelete, onStatusChange, data, showTaskFull, setTaskId}:taskCardProps) => {
+const TaskCard = ({onDelete, onStatusChange, data, showTaskFull, setTaskId, setUpdateModal}:taskCardProps) => {
   const variant = {
     pending: "text-gray-500 bg-white",
     inprogress: " border-yello-500 text-yellow-500 bg-yellow-50",
@@ -26,6 +26,10 @@ const TaskCard = ({onDelete, onStatusChange, data, showTaskFull, setTaskId}:task
 const handleSetData = (id:string)=>{
   showTaskFull(true)
   setTaskId(id)
+}
+const handleUpdateModal = ()=>{
+  setUpdateModal(true)
+  setTaskId(data?._id)
 }
 
   return (
@@ -51,7 +55,7 @@ const handleSetData = (id:string)=>{
       <div
         className={`bg-white bg-opacity-10 p-1 hidden sm:flex items-center absolute top-0 right-0 gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200 `}
       >
-        <PenLine size={32} className="hover:bg-gray-100 p-1 text-gray-500 cursor-pointer" />
+        <PenLine onClick={handleUpdateModal} size={32} className="hover:bg-gray-100 p-1 text-gray-500 cursor-pointer" />
         <Ellipsis
           size={32}
           className="hover:bg-gray-100 p-1 text-gray-500 cursor-pointer relative"

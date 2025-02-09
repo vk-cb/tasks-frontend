@@ -62,7 +62,7 @@ const TaskDetails = ({data, onDelete, taskStatus , onStatusChange,fetchTaskById}
         <Select onChange={(e)=>handleSelect(e.target.value)} placeholder="Select status" options={taskStatus} value={data?.status} className={styleVariable}/>
         </div>
         <div className="flex gap-4 mt-2">
-        <PenLine size={28} className="hover:bg-gray-100 p-1 text-gray-500 cursor-pointer" />
+        {/* <PenLine size={28} className="hover:bg-gray-100 p-1 text-gray-500 cursor-pointer" /> */}
         <Trash2 onClick={handleDelete}  size={28} className="hover:bg-red-100 p-1 text-red-400 hover:text-red-500 cursor-pointer"/>
         </div>
       </div>

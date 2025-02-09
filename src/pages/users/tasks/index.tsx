@@ -8,6 +8,7 @@ import {
   deleteTask,
   getAllTask,
   getTaskById,
+  updateTask,
 } from "../../../container/apiCall/user";
 import {
   ChangeStatusProps,
@@ -33,6 +34,7 @@ const TaskMainPage = () => {
   const [taskId, setTaskId] = useState("");
   const [singleData, setSingleData] = useState<TaskApiProps>();
   const [status, setStatus] = useState([]);
+  const [updateModal, setUpdateModal] = useState(false)
   const [taskState, setTaskState] = useState({
     title: "",
     description: "",
@@ -47,8 +49,6 @@ const TaskMainPage = () => {
       hideLoader();
       errorAlert(response?.msg);
     }
-
-   
   };
   useEffect(() => {
     fetchAllTasks();
@@ -65,6 +65,7 @@ const TaskMainPage = () => {
           title: "",
           description: "",
         });
+        successAlert(res?.msg)
         hideLoader();
       }
     } catch (error) {
@@ -78,12 +79,13 @@ const TaskMainPage = () => {
     const res = await getTaskById(id);
     if (res.status === 200) {
       setSingleData(res?.data);
-      console.log(res.data, "hjkjhjjklllllllllllll")
+      setTaskState({...taskState, title: res?.data.title, description: res?.data?.description})
       hideLoader();
     } else {
       hideLoader();
     }
   };
+  console.log(taskState)
   //delete task
   const deleteUserTask = async (id: string) => {
     showLoader();
@@ -100,12 +102,17 @@ const TaskMainPage = () => {
       status: data,
     };
     const response = await changeStatus(payload, id);
+    if(response.status === 200){
+      fetchAllTasks()
+    }
     return response; 
   };
   //taskStatus Data
   const fetchTaskStatus = async () => {
+    showLoader()
     const response = await getTaskStatus();
     if (response.status === 200) {
+      hideLoader()
       setStatus(
         response.data.map((d) => ({
           label: d?.taskStatus,
@@ -119,13 +126,26 @@ const TaskMainPage = () => {
       fetchTaskById(taskId);
       fetchTaskStatus();
     }
-  }, [taskId]);
+  }, [taskId, updateModal]);
 
+  //update task 
+  const handleUpdateTask = async()=>{
+    const response = await updateTask(taskState, taskId)
+    if(response?.status === 200){
+      fetchAllTasks()
+    }
+
+  }
+  const handleCancelUpdate = async()=>{
+    setUpdateModal(false)
+    fetchAllTasks()
+  }
   return (
     <div className="mx-2 sm:mx-0 w-full sm:w-xl  md:w-2xl xl:w-4xl mt-2">
       {tasks?.data?.map((d: TaskApiProps, index: number) => (
         <div key={`tasks-${index}`} className="mt-8">
           <TaskCard
+          setUpdateModal={setUpdateModal}
             setTaskId={setTaskId}
             showTaskFull={setShow}
             data={d}
@@ -134,6 +154,9 @@ const TaskMainPage = () => {
           />
         </div>
       ))}
+      {
+        !isAddTask && 
+      
       <div
         className="flex gap-2 cursor-pointer mt-4 text-sm group p-2 transition"
         onClick={() => setIsAddTask(true)}
@@ -143,7 +166,7 @@ const TaskMainPage = () => {
           size={18}
         />
         <p className="text-gray-400 group-hover:text-blue-400">Add Task</p>
-      </div>
+      </div>}
       {isAddTask && (
         <AddTask
           createTask={taskState}
@@ -152,6 +175,21 @@ const TaskMainPage = () => {
           onCancel={() => setIsAddTask(false)}
         />
       )}
+      {/* Update Task */}
+       <MakeModal
+        className="sm:mx-0 w-full sm:w-2xl  md:w-[720px] xl:w-[945px] max-h-[400px]"
+        isOpen={updateModal}
+        onClose={() => setUpdateModal(false)}
+      >
+        <AddTask createTask={taskState}
+        update={true}
+          setCreateTask={setTaskState}
+          onAdd={handleUpdateTask}
+          onCancel={handleCancelUpdate}
+          />
+      </MakeModal>
+
+      
       <MakeModal
         className="w-[300px] sm:w-[400px] md:w-[550px] lg:w-[700px] max-h-[400px]"
         isOpen={show}
