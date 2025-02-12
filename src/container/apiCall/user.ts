@@ -26,3 +26,7 @@ export const deleteTask = async(id:string)=>{
 export const changeStatus = async(data:ChangeStatusProps, id:string)=>{
     return makeApiRequest("PUT",`${API_URLS.CHANGE_STATUS}${id}`, data )
 }
+
+export const usersAndTaskDetails = async()=>{
+    return makeApiRequest("GET", API_URLS.USER_AND_TAK_DETAILS )
+}

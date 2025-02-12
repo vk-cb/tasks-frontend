@@ -19,6 +19,7 @@ const openRoutes: RouteType[] = [
   const usersRoutes : RouteType[] = [
     { path: "/user/tasks", element: <TaskMainPage/> },
     { path: "/profile", element: <Profile/> },
+    { path: "*", element: <TaskMainPage/> },
   ]
 
   const PagesRoute = () => {
