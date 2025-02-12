@@ -6,14 +6,9 @@ import { useEffect, useState } from "react";
 import { usersAndTaskDetails } from "../../../container/apiCall/user";
 import { hideLoader, showLoader } from "../../../components/ui/loader/loader";
 
-interface ProfileProps {
-  totalTasks: number;
-  pendingTasks: number;
-  completedTasks: number;
-  inProgressTasks: number;
-}
 
-const Profile: React.FC<ProfileProps> = ({ totalTasks, pendingTasks, completedTasks, inProgressTasks }) => {
+
+const Profile ()=> {
   const data = useSelector((state:RootState)=>state?.auth?.user?.data)
   console.log(data)
   const [user, setUser] = useState([])
