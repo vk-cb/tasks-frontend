@@ -5,7 +5,7 @@ interface Option {
 }
 interface SelectProps {
     label?: string;
-    options?: Option;
+    options?: Option[];
     second_class?: string;
     star?: string;
     placeholder?: string;
@@ -14,12 +14,13 @@ interface SelectProps {
     optionLabel?: keyof Option;
     optionValue?: keyof Option;
     name?: string;
-    disabled?: boolean;
+    className? : string;
 }
 const Select = ({
   label,
   options,
   second_class = "",
+  className,
   star,
   placeholder,
   onChange,
@@ -27,7 +28,6 @@ const Select = ({
   optionLabel = "label",
   optionValue = "value",
   name,
-  disabled,
 }:SelectProps) => {
   return (
     <div className={`w-full ${second_class}`}>
@@ -39,15 +39,14 @@ const Select = ({
       )}
       <div className="relative pt-2">
         <select
-          disabled={disabled}
           name={name}
           required={!!star}
           value={value}
           onChange={onChange}
-          className="w-full p-2 border border-gray-400 rounded-md outline-none text-gray-700 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50"
+          className={`w-full p-2 border border-gray-400 rounded-md outline-none text-gray-700 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50 ${className}`}
         >
           {placeholder && (
-            <option value="" disabled>
+            <option value="">
               {placeholder}
             </option>
           )}

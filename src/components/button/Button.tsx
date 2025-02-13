@@ -39,7 +39,7 @@ const Button: React.FC<ButtonProps> = ({
   const variants: Record<string, string> = {
     primary: "bg-blue-500 text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-300",
     secondary: "bg-gray-500 text-white hover:bg-gray-600 focus:ring-2 focus:ring-gray-300",
-    danger: "bg-red-500 text-white hover:bg-red-600 focus:ring-2 focus:ring-red-300",
+    danger: "bg-red-400 text-white hover:bg-red-500 focus:ring-2 focus:ring-red-300",
     success: "bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300",
     warning: "bg-yellow-500 text-black hover:bg-yellow-600 focus:ring-2 focus:ring-yellow-300",
     outline: "border border-gray-500 text-black hover:bg-gray-100 focus:ring-2 focus:ring-gray-200",
@@ -52,7 +52,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={`flex items-center justify-center font-medium transition-all duration-200 ${padding} ${borderRadius} ${variants[variant]} ${btnClass}`}
+      className={`flex cursor-pointer items-center justify-center font-medium transition-all duration-200 ${padding} ${borderRadius} ${variants[variant]} ${btnClass}`}
       onClick={onClick}
       {...props}
       type={type}
