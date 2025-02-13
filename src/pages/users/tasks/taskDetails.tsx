@@ -1,38 +1,19 @@
-import { Check, Trash2 , PenLine } from "lucide-react";
+import { Check, Trash2  } from "lucide-react";
 import Select from "../../../components/select/Select";
 import { taskDetailProps } from "../../../../interfaces/apiInterface";
-import { getTaskStatus } from "../../../container/apiCall/common";
-import { useEffect, useState } from "react";
 
-const TaskDetails = ({data, onDelete, taskStatus , onStatusChange,fetchTaskById}:taskDetailProps) => {
+const TaskDetails = ({data, onDelete, taskStatus ,  handleSelect}:taskDetailProps) => {
   const variant = {
     pending: "text-gray-500 bg-white",
     inprogress: " border-yellow-500 text-yellow-500 bg-yellow-50",
     completed: "border-green-500 text-green-500 bg-green-50",
   };
   const styleVariable = data?.status === "done" ? variant.completed : data?.status === "in-progress" ? variant.inprogress : variant.pending
-  const [status, setStatus] = useState([])
-  const fetchStatus = async()=>{
-    const response = await getTaskStatus()
-    if(response.status === 200){
-      setStatus(response.data.map((d)=>({
-        label : d?.taskStatus,
-        value : d.taskStatus
-      })))
-    }
-  }
-  useEffect(()=>{
-    fetchStatus()
-  },[])
+
   const handleDelete = ()=>{
     onDelete(data?._id)
   }
-  const handleSelect = async (value) => {
-    const res = await onStatusChange(value, data?._id); 
-    if(res.status ===200){
-      fetchTaskById(data?._id)
-    }
-  };
+
   
   return (
     <div>
@@ -59,7 +40,7 @@ const TaskDetails = ({data, onDelete, taskStatus , onStatusChange,fetchTaskById}
       </div>
       <div className="flex justify-between items-center mt-6 border-t border-t-gray-400">
         <div className="mt-2">
-        <Select onChange={(e)=>handleSelect(e.target.value)} placeholder="Select status" options={taskStatus} value={data?.status} className={styleVariable}/>
+        <Select onChange={(e)=>handleSelect(e.target.value, data)} placeholder="Select status" options={taskStatus} value={data?.status} className={styleVariable}/>
         </div>
         <div className="flex gap-4 mt-2">
         {/* <PenLine size={28} className="hover:bg-gray-100 p-1 text-gray-500 cursor-pointer" /> */}

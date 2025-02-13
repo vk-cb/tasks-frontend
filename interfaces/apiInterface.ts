@@ -38,6 +38,57 @@ export interface createTaskProps{
    export interface taskDetailProps{
     data : TaskApiProps;
     onDelete: (id:string) => void;
-    onStatusChange: (data: any, id: string) => void;
-    taskStatus : TaskStatusProps
+    taskStatus : TaskStatusProps[]
+    handleSelect :any
    }
+
+   export interface deleteApiResponse{
+    status: number;
+    msg: string;
+   }
+
+   export interface singleTaskPropsApiResponse{
+    id: string,
+    taskStatus : string
+   }
+  export interface taskStatusApiResponse{
+    status: number;
+    message: string;
+    data : singleTaskPropsApiResponse[]
+  }
+  // {
+  //   "msg": "Task details fetched successfully",
+  //   "status": 200,
+  //   "data": {
+  //     "profile": {
+  //       "_id": "67951e1790c38a251f4e42b5",
+  //       "name": "Vicky Gupta",
+  //       "email": "vicky@user.in",
+  //       "role": "user"
+  //     },
+  //     "taskStats": {
+  //       "totalTasks": 5,
+  //       "pendingTasks": 1,
+  //       "doneTasks": 1,
+  //       "inProgressTasks": 3
+  //     }
+  //   }
+  // }
+  export interface profileProps {
+    msg: string;
+    status: number;
+    data: {
+      profile: {
+        _id: string;
+        name: string;
+        email: string;
+        role: string;
+      };
+      taskStats: {
+        totalTasks: number;
+        pendingTasks: number;
+        doneTasks: number;
+        inProgressTasks: number;
+      };
+    };
+  }

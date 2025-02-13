@@ -12,7 +12,7 @@ import { getRoles} from "../../container/apiCall/common";
 import { useDispatch } from "react-redux";
 import { register } from "../../store/reducers/auth";
 import { AppDispatch } from "../../store/store";
-import { errorAlert, successAlert } from "../../components/ui/loader/loader";
+import {  successAlert } from "../../components/ui/loader/loader";
 
 const Signup = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -30,8 +30,8 @@ const Signup = () => {
     const res = await dispatch(register(state))
      if(res?.meta?.requestStatus === "fulfilled"){
            navigate('/')
-           const user = res.payload
-          successAlert(user?.msg || "User Created Successfully")
+           
+          successAlert("User Created Successfully")
         }
         
   };
@@ -39,11 +39,11 @@ const Signup = () => {
     
    const res = await getRoles()
    if(res.status === 200){
-    setRoles(res?.data.map((d)=>({label : d?.role, value : d?.role})))
+    setRoles(res?.data.map((d:any)=>({label : d?.role, value : d?.role})))
    }
   }
   useEffect(()=>{
-    const res = fetchRoles()
+     fetchRoles()
   },[])
 console.log(state)
   return (

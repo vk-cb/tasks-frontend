@@ -1,8 +1,8 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import {  MdOutlineSpaceDashboard } from "react-icons/md";
-import { BsPeople,BsPersonVcard } from "react-icons/bs";
-import { IoListOutline,IoTrashBinOutline } from "react-icons/io5";
+
+import { BsPeople } from "react-icons/bs";
+import { IoTrashBinOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { FaTasks } from "react-icons/fa";
 import {MenuProps} from '../../../../../interfaces/index'
@@ -11,7 +11,7 @@ import { RootState } from "../../../../store/store";
 
 const Menu: React.FC<MenuProps> = () => {
   const location = useLocation();
-console.log(location.pathname.startsWith('/billing'));
+console.log(location.pathname.startsWith('/profile'));
 const role = useSelector((state:RootState)=>state?.auth?.user?.data?.role)
 console.log(role)
   const menuItems = [ 
@@ -41,6 +41,7 @@ console.log(role)
   },
   
 ]
+
 const currentUserType = role === "user" ? "user" : "admin";
 const filteredMenuData = menuItems.filter(item => item.userType.includes(currentUserType));
   return (
@@ -49,11 +50,14 @@ const filteredMenuData = menuItems.filter(item => item.userType.includes(current
         <ul className="flex flex-col gap-2">
           {filteredMenuData.map((route, index) => (
             <li key={index}>
-              <NavLink 
-                to={route.toLink} 
-                className={`flex gap-2 mb-1 items-center font-medium cursor-pointer py-2 pl-2 hover:bg-gray-100 text-gray-500  duration-300 ease-in-out `}
+              <NavLink
+                to={route.toLink}
+                className={({ isActive }) =>
+                  `flex gap-2 mb-1 items-center font-medium cursor-pointer py-2 pl-2 duration-300 ease-in-out 
+                  ${isActive ? "bg-blue-400 text-white" : "hover:bg-gray-100 text-gray-500"}`
+                }
               >
-                {route.icon} {route.title}  
+                {route.icon} {route.title}
               </NavLink>
             </li>
           ))}

@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse, RawAxiosRequestHeaders } from "axios";
+import axios, {  AxiosResponse, RawAxiosRequestHeaders } from "axios";
 
 const baseUrl = import.meta.env.VITE_REACT_API_URL 
 

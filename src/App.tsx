@@ -1,5 +1,4 @@
 import { useDispatch } from "react-redux"
-import Login from "./pages/auth/Login"
 import PagesRoute from "./routes/routes"
 import { AppDispatch } from "./store/store"
 import { useEffect } from "react"

@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import { IoIosLogOut } from "react-icons/io";
+import  { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { MdOutlineArrowOutward } from "react-icons/md";
 import Menu from "./menu/menu";
-import Button from "../../../components/button/Button";
 import { logout } from "../../../store/reducers/auth";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store/store";
@@ -15,7 +13,7 @@ const LeftBar = () => {
   const [selectedMenu, setSelectedMenu] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const handleLogout = () => {
-   const res = dispatch(logout())
+    dispatch(logout())
    navigate('/')
   };
   return (

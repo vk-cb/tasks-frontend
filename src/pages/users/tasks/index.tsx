@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import TaskDetails from "./taskDetails";
 import AddTask from "./addTask";
 import TaskCard from "./taskCard";
@@ -13,9 +13,7 @@ import {
 import {
   ChangeStatusProps,
   GetTasksResponse,
-  singleTaskProps,
   TaskApiProps,
-  TaskStatus,
 } from "../../../../interfaces/apiInterface";
 import MakeModal from "../../../components/modal/MakeModal";
 import { Plus } from "lucide-react";
@@ -33,8 +31,8 @@ const TaskMainPage = () => {
   const [show, setShow] = useState(false);
   const [taskId, setTaskId] = useState("");
   const [singleData, setSingleData] = useState<TaskApiProps>();
-  const [status, setStatus] = useState([]);
-  const [updateModal, setUpdateModal] = useState(false)
+  const [status, setStatus] = useState<{ label: string; value: string }[]>([]);
+  const [updateModal, setUpdateModal] = useState<boolean>(false)
   const [taskState, setTaskState] = useState({
     title: "",
     description: "",
@@ -69,7 +67,11 @@ const TaskMainPage = () => {
         hideLoader();
       }
     } catch (error) {
-      errorAlert(error.msg);
+      if (error instanceof Error) {
+        errorAlert(error.message);
+      } else {
+        errorAlert((error as { msg: string })?.msg || "An unknown error occurred");
+      }
     } finally {
       hideLoader();
     }
@@ -85,7 +87,7 @@ const TaskMainPage = () => {
       hideLoader();
     }
   };
-  console.log(taskState)
+
   //delete task
   const deleteUserTask = async (id: string) => {
     showLoader();
@@ -109,18 +111,27 @@ const TaskMainPage = () => {
   };
   //taskStatus Data
   const fetchTaskStatus = async () => {
-    showLoader()
-    const response = await getTaskStatus();
-    if (response.status === 200) {
-      hideLoader()
-      setStatus(
-        response.data.map((d) => ({
-          label: d?.taskStatus,
-          value: d.taskStatus,
-        }))
-      );
+    showLoader();
+    
+    try {
+      const { status, data } = await getTaskStatus(); 
+      
+      if (status === 200) {
+        hideLoader();
+        setStatus(
+          data.map((d) => ({
+            label: d.taskStatus,
+            value: d.taskStatus,
+          }))
+        );
+      }
+    } catch (error) {
+      console.error("Error fetching task status:", error);
+    } finally {
+      hideLoader();
     }
   };
+  
   useEffect(() => {
     if (taskId) {
       fetchTaskById(taskId);
@@ -133,6 +144,7 @@ const TaskMainPage = () => {
     const response = await updateTask(taskState, taskId)
     if(response?.status === 200){
       fetchAllTasks()
+      setUpdateModal(false)
     }
 
   }
@@ -140,12 +152,20 @@ const TaskMainPage = () => {
     setUpdateModal(false)
     fetchAllTasks()
   }
+
+  //handle Select 
+  const handleSelect = async (value:any, data:any) => {
+    const res = await fetchStatusChangeTask(value, data?._id); 
+    if(res?.status ===200){
+      fetchTaskById(data?._id)
+    }
+  };
   return (
     <div className="mx-2 sm:mx-0 w-full sm:w-xl  md:w-2xl xl:w-4xl mt-2">
       {tasks?.data?.map((d: TaskApiProps, index: number) => (
         <div key={`tasks-${index}`} className="mt-8">
           <TaskCard
-          setUpdateModal={setUpdateModal}
+            setUpdateModal={setUpdateModal}
             setTaskId={setTaskId}
             showTaskFull={setShow}
             data={d}
@@ -196,10 +216,9 @@ const TaskMainPage = () => {
         onClose={() => setShow(false)}
       >
         <TaskDetails
+          handleSelect={handleSelect}
           taskStatus={status}
           onDelete={deleteUserTask}
-          onStatusChange={fetchStatusChangeTask}
-          fetchTaskById={fetchTaskById}
           data={
             singleData ?? {
               _id: "",

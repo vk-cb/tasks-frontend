@@ -28,7 +28,9 @@ const handleSetData = (id:string)=>{
   setTaskId(id)
 }
 const handleUpdateModal = ()=>{
-  setUpdateModal(true)
+  if (setUpdateModal) {
+    setUpdateModal(true);
+  }
   setTaskId(data?._id)
 }
 
@@ -64,7 +66,7 @@ const handleUpdateModal = ()=>{
         {popoverOpen && (
           <div ref={popoverRef} className="absolute -right-16 top-8 w-40 bg-white  rounded-md z-10 popOver">
             {
-            buttonData.map((d, index)=>(
+            buttonData.map((d)=>(
               <button
               className="cursor-pointer w-full px-4 py-2 text-left hover:bg-gray-100"
               onClick={() => {
