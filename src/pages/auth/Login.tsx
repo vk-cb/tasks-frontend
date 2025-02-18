@@ -1,49 +1,61 @@
-
-import { useState } from 'react';
-import { FcGoogle } from 'react-icons/fc';
-import { FaApple, FaFacebook } from 'react-icons/fa';
-import SocialButton from '../../components/ui/socialButton/SocialButton';
-import Button from '../../components/button/Button';
-import Input from '../../components/input/Input';
-import { handleChange } from '../../utility/usedFunctions';
-import { LoginState } from '../../../interfaces';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { login, User } from '../../store/reducers/auth';
-import type { AppDispatch } from '../../store/store';
-import { successAlert } from '../../components/ui/loader/loader';
+import { useState } from "react";
+import { FcGoogle } from "react-icons/fc";
+import { FaApple, FaFacebook } from "react-icons/fa";
+import SocialButton from "../../components/ui/socialButton/SocialButton";
+import Button from "../../components/button/Button";
+import Input from "../../components/input/Input";
+import { handleChange } from "../../utility/usedFunctions";
+import { LoginState } from "../../../interfaces";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login, User } from "../../store/reducers/auth";
+import type { AppDispatch } from "../../store/store";
+import {
+  errorAlert,
+  hideLoader,
+  showLoader,
+  successAlert,
+} from "../../components/ui/loader/loader";
 const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const [state, setState] = useState<LoginState> ({
-    email : "",
-    password : ""
-  })
+  const [state, setState] = useState<LoginState>({
+    email: "",
+    password: "",
+  });
 
-  const handleSubmit = async (e:any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const response = await dispatch(login(state))
-    if(response?.meta?.requestStatus === "fulfilled"){
-      const user = response.payload as User; 
-      user?.data?.role==="user" ? navigate('/user/tasks') : navigate('/')
-      
-      successAlert(user?.msg || "Login Successfully")
+    showLoader();
+    try {
+      const response = await dispatch(login(state));
+      if (response?.meta?.requestStatus === "fulfilled") {
+        const user = response.payload as User;
+        user?.data?.role === "user"
+          ? navigate("/user/tasks")
+          : navigate("/admin/users-list");
+
+        successAlert(user?.msg || "Login Successfully");
+      }
+    } catch (error) {
+      errorAlert("Please Check Yout credentials");
+    } finally {
+      hideLoader();
     }
   };
 
-
   return (
     <div className=" w-full bg-linear-to-b from-[#9fd4ef] to-white min-h-screen flex flex-col items-center justify-center pt-20 sm:p-4 p-1 relative">
-      <p className='absolute top-8 left-4 text-3xl font-bold italic bg-gradient-to-r from-blue-600 to-teal-500 inline-block text-transparent bg-clip-text'>
-  TaskMaster
-</p>
+      <p className="absolute top-8 left-4 text-3xl font-bold italic bg-gradient-to-r from-blue-600 to-teal-500 inline-block text-transparent bg-clip-text">
+        TaskMaster
+      </p>
       <div className="max-w-md w-full bg-linear-to-b from-[#c6f0fb] to-white p-8 rounded-lg shadow-sm">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-teal-500 inline-block text-transparent bg-clip-text mb-2">
-          Organize your world, master your workflow
+            Organize your world, master your workflow
           </h1>
           <p className="text-gray-600">
-          Craft, Track, and Conquer goals in one free hub
+            Craft, Track, and Conquer goals in one free hub
           </p>
         </div>
 
@@ -57,17 +69,50 @@ const Login = () => {
               className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               required
             /> */}
-            <Input name='email' type='email' placeholder='Enter Your Email' value={state.email} onChange={(e)=>handleChange(state, setState, e.target.name as keyof LoginState, e.target.value)} />
+            <Input
+              name="email"
+              type="email"
+              placeholder="Enter Your Email"
+              value={state.email}
+              onChange={(e) =>
+                handleChange(
+                  state,
+                  setState,
+                  e.target.name as keyof LoginState,
+                  e.target.value
+                )
+              }
+            />
 
-            <Input name='password' type='password' placeholder='Enter Your Password' value={state.password} onChange={(e)=>handleChange(state, setState, e.target.name as keyof LoginState, e.target.value)}/>
-            
-           
+            <Input
+              name="password"
+              type="password"
+              placeholder="Enter Your Password"
+              value={state.password}
+              onChange={(e) =>
+                handleChange(
+                  state,
+                  setState,
+                  e.target.name as keyof LoginState,
+                  e.target.value
+                )
+              }
+            />
           </div>
 
-          <Button type='submit' text="Login" btnClass='w-full cursor-pointer py-2' variant='outline'/>
+          <Button
+            type="submit"
+            text="Login"
+            btnClass="w-full cursor-pointer py-2"
+            variant="outline"
+          />
           <div className="text-center">
             <Link to="/register" className="text-sm ">
-              don't have an account? <span className='text-blue-600 hover:underline'> Register here</span>
+              don't have an account?{" "}
+              <span className="text-blue-600 hover:underline">
+                {" "}
+                Register here
+              </span>
             </Link>
           </div>
         </form>
@@ -79,15 +124,22 @@ const Login = () => {
         </div>
 
         <div className="grid grid-cols-3 gap-3">
-          <SocialButton icon={<FcGoogle className="text-xl" />} provider="Google" />
-          <SocialButton icon={<FaApple className="text-xl" />} provider="Apple" />
-          <SocialButton icon={<FaFacebook className="text-xl text-blue-600" />} provider="Facebook" />
+          <SocialButton
+            icon={<FcGoogle className="text-xl" />}
+            provider="Google"
+          />
+          <SocialButton
+            icon={<FaApple className="text-xl" />}
+            provider="Apple"
+          />
+          <SocialButton
+            icon={<FaFacebook className="text-xl text-blue-600" />}
+            provider="Facebook"
+          />
         </div>
       </div>
     </div>
   );
 };
-
-
 
 export default Login;

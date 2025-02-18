@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { MdOutlineArrowOutward } from "react-icons/md";
@@ -13,8 +13,8 @@ const LeftBar = () => {
   const [selectedMenu, setSelectedMenu] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const handleLogout = () => {
-    dispatch(logout())
-   navigate('/')
+    dispatch(logout());
+    navigate("/");
   };
   return (
     <>
@@ -37,7 +37,7 @@ const LeftBar = () => {
           onClick={() => setIsOpen(false)}
           className="lg:hidden absolute top-4 right-4 bg-gray-800 text-white p-2 rounded-md shadow-md"
         >
-          <CircleX  size={24} />
+          <CircleX size={24} />
         </button>
         {/* Logo & Title */}
         <div className="mb-4 flex flex-col items-center border-b-2 pb-2 border-light">
@@ -56,7 +56,7 @@ const LeftBar = () => {
           <div className="flex justify-center">
             <button
               onClick={handleLogout}
-              className="flex items-center gap-2 bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600 transition"
+              className="flex items-center cursor-pointer gap-2 bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600 transition"
             >
               Logout <MdOutlineArrowOutward />
             </button>
