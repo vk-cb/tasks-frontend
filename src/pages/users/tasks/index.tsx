@@ -146,7 +146,6 @@ const TaskMainPage = () => {
       fetchAllTasks()
       setUpdateModal(false)
     }
-
   }
   const handleCancelUpdate = async()=>{
     setUpdateModal(false)
@@ -219,6 +218,8 @@ const TaskMainPage = () => {
           handleSelect={handleSelect}
           taskStatus={status}
           onDelete={deleteUserTask}
+          setUpdateModal={setUpdateModal}
+          setShow={setShow}
           data={
             singleData ?? {
               _id: "",

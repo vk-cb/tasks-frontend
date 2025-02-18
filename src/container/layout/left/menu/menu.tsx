@@ -15,23 +15,25 @@ console.log(location.pathname.startsWith('/profile'));
 const role = useSelector((state:RootState)=>state?.auth?.user?.data?.role)
 console.log(role)
   const menuItems = [ 
+    
   {
     title: "Tasks",
     icon: <FaTasks size={20} />,
     toLink:`user/tasks` ,
     userType: [ "user"],
   },
-  {
-    title: "Deleted Tasks",
-    icon: <IoTrashBinOutline size={20} />,
-    toLink:`${role}/deleted-task`,
-    userType: [ "admin"],
-  },
+  
   {
     title: "Users",
     icon: <BsPeople size={20} />,
     toLink: `admin/users-list`,
     userType: ["admin"],
+  },
+  {
+    title: "Deleted Tasks",
+    icon: <IoTrashBinOutline size={20} />,
+    toLink:`${role}/deleted-task`,
+    userType: [ "admin"],
   },
   {
     title: "Profile",

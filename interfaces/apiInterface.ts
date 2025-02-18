@@ -40,6 +40,8 @@ export interface createTaskProps{
     onDelete: (id:string) => void;
     taskStatus : TaskStatusProps[]
     handleSelect :any
+    setUpdateModal: React.Dispatch<React.SetStateAction<boolean>>
+    setShow: React.Dispatch<React.SetStateAction<boolean>>;
    }
 
    export interface deleteApiResponse{

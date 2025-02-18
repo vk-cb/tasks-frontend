@@ -5,6 +5,7 @@ import { RouteType } from "../../interfaces";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import TaskMainPage from "../pages/users/tasks";
+import Users from "../pages/admin/users";
 const Login = lazy(() => import("../pages/auth/Login"));
 const Signup = lazy(() => import("../pages/auth/Signup"));
 const Profile = lazy(() => import("../pages/users/profile"));
@@ -15,6 +16,8 @@ const openRoutes: RouteType[] = [
   ];
 
   const adminRoute : RouteType[] = [
+    { path: "/profile", element: <Profile/> },
+    { path: "/admin/users-list", element: <Users/> },
   ]
   const usersRoutes : RouteType[] = [
     { path: "/user/tasks", element: <TaskMainPage/> },

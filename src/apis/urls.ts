@@ -13,5 +13,7 @@ export const API_URLS = {
     GET_TASK_BY_ID : "/users/get-tasks/",
     CHANGE_STATUS : "/users/status-change/",
     //users and task details
-    USER_AND_TAK_DETAILS : "/users/task-user-details"
+    USER_AND_TAK_DETAILS : "/users/task-user-details",
+    //admin urls 
+    LIST_OF_USERS : "/admin/get-users"
 }

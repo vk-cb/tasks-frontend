@@ -33,7 +33,7 @@ const Login = () => {
 
 
   return (
-    <div className=" w-full bg-linear-to-b from-[#9fd4ef] to-white min-h-screen flex flex-col items-center justify-center sm:p-4 p-1 relative">
+    <div className=" w-full bg-linear-to-b from-[#9fd4ef] to-white min-h-screen flex flex-col items-center justify-center pt-20 sm:p-4 p-1 relative">
       <p className='absolute top-8 left-4 text-3xl font-bold italic bg-gradient-to-r from-blue-600 to-teal-500 inline-block text-transparent bg-clip-text'>
   TaskMaster
 </p>

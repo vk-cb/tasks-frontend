@@ -1,8 +1,8 @@
-import { Check, Trash2  } from "lucide-react";
+import { Check, PenLine, Trash2  } from "lucide-react";
 import Select from "../../../components/select/Select";
 import { taskDetailProps } from "../../../../interfaces/apiInterface";
 
-const TaskDetails = ({data, onDelete, taskStatus ,  handleSelect}:taskDetailProps) => {
+const TaskDetails = ({data, onDelete, taskStatus ,  handleSelect, setUpdateModal,setShow }:taskDetailProps) => {
   const variant = {
     pending: "text-gray-500 bg-white",
     inprogress: " border-yellow-500 text-yellow-500 bg-yellow-50",
@@ -13,7 +13,10 @@ const TaskDetails = ({data, onDelete, taskStatus ,  handleSelect}:taskDetailProp
   const handleDelete = ()=>{
     onDelete(data?._id)
   }
-
+const handleUpdate = ()=>{
+  setShow(false)
+  setUpdateModal(true)
+}
   
   return (
     <div>
@@ -43,7 +46,7 @@ const TaskDetails = ({data, onDelete, taskStatus ,  handleSelect}:taskDetailProp
         <Select onChange={(e)=>handleSelect(e.target.value, data)} placeholder="Select status" options={taskStatus} value={data?.status} className={styleVariable}/>
         </div>
         <div className="flex gap-4 mt-2">
-        {/* <PenLine size={28} className="hover:bg-gray-100 p-1 text-gray-500 cursor-pointer" /> */}
+        <PenLine size={28} onClick={handleUpdate} className="hover:bg-gray-100 p-1 text-gray-500 cursor-pointer" />
         <Trash2 onClick={handleDelete}  size={28} className="hover:bg-red-100 p-1 text-red-400 hover:text-red-500 cursor-pointer"/>
         </div>
       </div>
