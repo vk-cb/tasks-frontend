@@ -32,7 +32,7 @@ const TaskMainPage = () => {
   const [taskId, setTaskId] = useState("");
   const [singleData, setSingleData] = useState<TaskApiProps>();
   const [status, setStatus] = useState<{ label: string; value: string }[]>([]);
-  const [updateModal, setUpdateModal] = useState<boolean>(false)
+  const [updateModal, setUpdateModal] = useState<boolean>(false);
   const [taskState, setTaskState] = useState({
     title: "",
     description: "",
@@ -53,9 +53,8 @@ const TaskMainPage = () => {
   }, [show]);
 
   const handleSubmit = async () => {
-
     try {
-      showLoader()
+      showLoader();
       const res: any = await createTask(taskState);
       if (res.status === 200) {
         fetchAllTasks();
@@ -63,14 +62,16 @@ const TaskMainPage = () => {
           title: "",
           description: "",
         });
-        successAlert(res?.msg)
+        successAlert(res?.msg);
         hideLoader();
       }
     } catch (error) {
       if (error instanceof Error) {
         errorAlert(error.message);
       } else {
-        errorAlert((error as { msg: string })?.msg || "An unknown error occurred");
+        errorAlert(
+          (error as { msg: string })?.msg || "An unknown error occurred"
+        );
       }
     } finally {
       hideLoader();
@@ -81,7 +82,11 @@ const TaskMainPage = () => {
     const res = await getTaskById(id);
     if (res.status === 200) {
       setSingleData(res?.data);
-      setTaskState({...taskState, title: res?.data.title, description: res?.data?.description})
+      setTaskState({
+        ...taskState,
+        title: res?.data.title,
+        description: res?.data?.description,
+      });
       hideLoader();
     } else {
       hideLoader();
@@ -94,7 +99,7 @@ const TaskMainPage = () => {
     const res = await deleteTask(id);
     if (res.status === 200) {
       hideLoader();
-      setShow(false)
+      setShow(false);
     }
     fetchAllTasks();
   };
@@ -104,18 +109,18 @@ const TaskMainPage = () => {
       status: data,
     };
     const response = await changeStatus(payload, id);
-    if(response.status === 200){
-      fetchAllTasks()
+    if (response.status === 200) {
+      fetchAllTasks();
     }
-    return response; 
+    return response;
   };
   //taskStatus Data
   const fetchTaskStatus = async () => {
     showLoader();
-    
+
     try {
-      const { status, data } = await getTaskStatus(); 
-      
+      const { status, data } = await getTaskStatus();
+
       if (status === 200) {
         hideLoader();
         setStatus(
@@ -131,7 +136,7 @@ const TaskMainPage = () => {
       hideLoader();
     }
   };
-  
+
   useEffect(() => {
     if (taskId) {
       fetchTaskById(taskId);
@@ -139,24 +144,24 @@ const TaskMainPage = () => {
     }
   }, [taskId, updateModal]);
 
-  //update task 
-  const handleUpdateTask = async()=>{
-    const response = await updateTask(taskState, taskId)
-    if(response?.status === 200){
-      fetchAllTasks()
-      setUpdateModal(false)
+  //update task
+  const handleUpdateTask = async () => {
+    const response = await updateTask(taskState, taskId);
+    if (response?.status === 200) {
+      fetchAllTasks();
+      setUpdateModal(false);
     }
-  }
-  const handleCancelUpdate = async()=>{
-    setUpdateModal(false)
-    fetchAllTasks()
-  }
+  };
+  const handleCancelUpdate = async () => {
+    setUpdateModal(false);
+    fetchAllTasks();
+  };
 
-  //handle Select 
-  const handleSelect = async (value:any, data:any) => {
-    const res = await fetchStatusChangeTask(value, data?._id); 
-    if(res?.status ===200){
-      fetchTaskById(data?._id)
+  //handle Select
+  const handleSelect = async (value: any, data: any) => {
+    const res = await fetchStatusChangeTask(value, data?._id);
+    if (res?.status === 200) {
+      fetchTaskById(data?._id);
     }
   };
   return (
@@ -173,19 +178,18 @@ const TaskMainPage = () => {
           />
         </div>
       ))}
-      {
-        !isAddTask && 
-      
-      <div
-        className="flex gap-2 cursor-pointer mt-4 text-sm group p-2 transition"
-        onClick={() => setIsAddTask(true)}
-      >
-        <Plus
-          className="rounded-full text-blue-400 group-hover:text-white group-hover:bg-blue-400"
-          size={18}
-        />
-        <p className="text-gray-400 group-hover:text-blue-400">Add Task</p>
-      </div>}
+      {!isAddTask && (
+        <div
+          className="flex gap-2 cursor-pointer mt-4 text-sm group p-2 transition"
+          onClick={() => setIsAddTask(true)}
+        >
+          <Plus
+            className="rounded-full text-blue-400 group-hover:text-white group-hover:bg-blue-400"
+            size={18}
+          />
+          <p className="text-gray-400 group-hover:text-blue-400">Add Task</p>
+        </div>
+      )}
       {isAddTask && (
         <AddTask
           createTask={taskState}
@@ -195,22 +199,22 @@ const TaskMainPage = () => {
         />
       )}
       {/* Update Task */}
-       <MakeModal
+      <MakeModal
         className="sm:mx-0 w-full sm:w-2xl  md:w-[720px] xl:w-[945px] max-h-[400px]"
         isOpen={updateModal}
         onClose={() => setUpdateModal(false)}
       >
-        <AddTask createTask={taskState}
-        update={true}
+        <AddTask
+          createTask={taskState}
+          update={true}
           setCreateTask={setTaskState}
           onAdd={handleUpdateTask}
           onCancel={handleCancelUpdate}
-          />
+        />
       </MakeModal>
 
-      
       <MakeModal
-        className="w-[300px] sm:w-[400px] md:w-[550px] lg:w-[700px] max-h-[400px]"
+        className="w-full sm:w-[400px] md:w-[550px] lg:w-[700px] max-h-[400px]"
         isOpen={show}
         onClose={() => setShow(false)}
       >

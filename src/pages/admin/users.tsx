@@ -8,6 +8,9 @@ import {
   hideLoader,
   showLoader,
 } from "../../components/ui/loader/loader";
+import { Eye, Trash2 } from "lucide-react";
+import Select from "../../components/select/Select";
+import { buttonData } from "../../utility/data";
 
 const Users = () => {
   const [usersData, setUsersData] = useState<userDataAdminApiProps[]>([]);
@@ -27,6 +30,7 @@ const Users = () => {
   useEffect(() => {
     fetchusersList();
   }, []);
+  const handleDeleteUser = async () => {};
   let rowData =
     usersData &&
     usersData.map((d) => ({
@@ -34,10 +38,24 @@ const Users = () => {
       email: d.email,
       role: d.role,
       status: d.isActive ? "Active" : "Blocked",
-      action: "delete",
+      action: (
+        <div className="flex gap-4">
+          <Trash2
+            onClick={handleDeleteUser}
+            className="text-red-400 cursor-pointer hover:text-red-500 duration-300 ease-in-out"
+          />
+          <Eye className="text-gray-500 cursor-pointer hover:text-gray-600 duration-300 ease-in-out" />
+        </div>
+      ),
     }));
+
   return (
-    <div className="w-full mt-16 lg:mt-8">
+    <div className="w-full mt-16 lg:mt-8 ">
+      <div className="flex justify-end pr-6 pb-4">
+        <div>
+          <Select options={buttonData} />
+        </div>
+      </div>
       <Table columns={usersListColumn} rows={rowData} />
     </div>
   );

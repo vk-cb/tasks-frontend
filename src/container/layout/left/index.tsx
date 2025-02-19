@@ -39,6 +39,7 @@ const LeftBar = () => {
         >
           <CircleX size={24} />
         </button>
+
         {/* Logo & Title */}
         <div className="mb-4 flex flex-col items-center border-b-2 pb-2 border-light">
           <p className="bg-gradient-to-r from-blue-600 to-teal-500 inline-block text-transparent bg-clip-text font-semibold tracking-wider pt-2">
@@ -52,7 +53,8 @@ const LeftBar = () => {
         </div>
 
         {/* Logout Button */}
-        <div className="flex flex-col absolute  bottom-5 left-[90px] gap-5 mt-auto">
+        <div className="flex flex-col justify-end h-[calc(100vh-300px)] mt-20">
+          {" "}
           <div className="flex justify-center">
             <button
               onClick={handleLogout}
