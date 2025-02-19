@@ -10,26 +10,27 @@ import {
 } from "../../components/ui/loader/loader";
 import { Eye, Trash2 } from "lucide-react";
 import Select from "../../components/select/Select";
-import { buttonData } from "../../utility/data";
+import { adminUsersListType } from "../../utility/data";
 
 const Users = () => {
   const [usersData, setUsersData] = useState<userDataAdminApiProps[]>([]);
+  const [userType, setUserType] = useState<any>(null);
   const fetchusersList = async () => {
+   
     showLoader();
     try {
-      const res = await usersList();
-      if (res.data.length) {
+      const res = await usersList({isActive : userType ? false : null});
         setUsersData(res.data as userDataAdminApiProps[]);
-      }
     } catch (error) {
       errorAlert("Something went Wrong");
     } finally {
       hideLoader();
     }
   };
+  console.log(userType)
   useEffect(() => {
     fetchusersList();
-  }, []);
+  }, [userType]);
   const handleDeleteUser = async () => {};
   let rowData =
     usersData &&
@@ -53,10 +54,17 @@ const Users = () => {
     <div className="w-full mt-16 lg:mt-8 ">
       <div className="flex justify-end pr-6 pb-4">
         <div>
-          <Select options={buttonData} />
+          <Select onChange={(e)=>setUserType(e.target.value)}  name="userType" value={userType} options={adminUsersListType} placeholder="Select User Type" />
         </div>
       </div>
       <Table columns={usersListColumn} rows={rowData} />
+      <div>
+        {rowData?.length === 0 && (
+          <div className="text-center mt-8">
+            <div className="text-xl font-semibold">No Users Found</div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

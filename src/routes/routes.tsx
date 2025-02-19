@@ -13,11 +13,13 @@ const Profile = lazy(() => import("../pages/users/profile"));
 const openRoutes: RouteType[] = [
   { path: "/", element: <Login /> },
   { path: "/register", element: <Signup /> },
+  { path: "*", element: <Login /> },
 ];
 
 const adminRoute: RouteType[] = [
   { path: "/profile", element: <Profile /> },
   { path: "/admin/users-list", element: <Users /> },
+  { path: "*", element: <Users /> },
 ];
 const usersRoutes: RouteType[] = [
   { path: "/user/tasks", element: <TaskMainPage /> },
