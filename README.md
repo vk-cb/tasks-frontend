@@ -1,12 +1,13 @@
 # 🚀 TodoMaster - Modern Todo App with Admin Dashboard
 
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/vk-cb/tasks-frontend/main.yml)](https://github.com/vk-cb/tasks-frontend/actions)
-[![Code Quality](https://img.shields.io/codefactor/grade/github/vk-cb/tasks-frontend)](https://www.codefactor.io/repository/github/yourusername/todomaster)
-[![Dependencies](https://img.shields.io/librariesio/github/yourusername/todomaster)](https://libraries.io/github/vk-cb/tasks-frontend)
+[![Frontend Repo](https://img.shields.io/codefactor/grade/github/vk-cb/tasks-frontend)](https://github.com/vk-cb/tasks-frontend)
+[![Backend Code](https://img.shields.io/librariesio/github/yourusername/todomaster)](https://github.com/vk-cb/tasks)
 
-**Live Demo:** [https://todomaster.example.com](https://your-deployment-link.com) 
+**Live Demo:** [https://vicks-tasks.vercel.app/](https://vicks-tasks.vercel.app/) 
 
-![TodoMaster Dashboard Preview](./screenshots/dashboard.png)
+![TodoMaster Dashboard Preview](https://res.cloudinary.com/ddfhmpnui/image/upload/v1739951216/task-master/tejvp5m2mm4cmyk868an.png)
+![TodoMaster Dashboard Preview-Profile](https://res.cloudinary.com/ddfhmpnui/image/upload/v1739951453/task-master/kuprdc2jaoktrywhrjff.png)
 
 ## 🌟 Features
 
@@ -60,7 +61,10 @@
 ### Installation
 ```bash
 # Clone repository
-git clone https://github.com/vk-cb/tasks-frontend.git
+git clone Frontend=> https://github.com/vk-cb/tasks-frontend.git
+git clone Backend=> https://github.com/vk-cb/tasks.git
+
+api docs => https://documenter.getpostman.com/view/31060373/2sAYQfEpRY
 
 # Install dependencies
 npm install
