@@ -82,6 +82,7 @@ export interface userDataAdminApiProps {
   email: string;
   role: string;
   isActive: boolean;
+  _id : string;
 }
 export interface adminListUserProps {
   data: userDataAdminApiProps[];

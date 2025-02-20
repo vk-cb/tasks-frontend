@@ -1,5 +1,9 @@
 export const usersListColumn = [
   {
+    name: "S.N.",
+    label: "sn",
+  },
+  {
     name: "Name",
     label: "name",
   },
