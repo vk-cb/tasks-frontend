@@ -12,3 +12,10 @@ export const buttonData = [
     value : "done"
    },
 ]
+export const adminUsersListType = [
+   { 
+    label : "Not Active/Blocked",
+    value : "false"
+   }
+   
+]

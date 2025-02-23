@@ -15,5 +15,6 @@ export const API_URLS = {
     //users and task details
     USER_AND_TAK_DETAILS : "/users/task-user-details",
     //admin urls 
-    LIST_OF_USERS : "/admin/get-users"
+    LIST_OF_USERS : "/admin/get-users",
+    DELETE_USER : "/admin/user-status/"
 }
